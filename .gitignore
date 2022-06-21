@@ -1,52 +1,73 @@
-# Prerequisites
-*.d
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+int mostraNumeroEmBinario(int bina) {
 
-# Linker output
-*.ilk
-*.map
-*.exp
+  int cont,final = 0;
+  int init = 0;
+  int bit;
+  int dec = 0;
+  for(cont =3; cont >=0; cont--) {
+    printf("%d",(bina >> cont) & 1);
+    bit = (bina >> cont) & 1;
+    if (cont == 3 && bit == 1){
+      init = -1 * pow(2, cont);
+    }
+    dec = dec + pow(2, cont) * bit;
+    final = dec + 2*init;
+  }
+  return final;
+}
 
-# Precompiled Headers
-*.gch
-*.pch
+int soma(int val1,int val2){
+  int resultado = 0;
+  resultado = val1 + val2;
+  return resultado;
+}
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+int main() {
+  int fortuna_infortunio,tentativas,yeNo;
+  int init,result;
+  int sua_sorte;
+  srand(time(NULL));
+  printf("Insira a quantidade de tentativas:\n",tentativas);
+  scanf("%d",&tentativas);
+  sua_sorte = rand() % 2;
+  if (sua_sorte == 0) {
+    fortuna_infortunio = rand() % 8 - 8;
+  }
+  else {
+    fortuna_infortunio = rand() % 8;
+  }
+  init = fortuna_infortunio;
+  printf("fortuna_infortunio atual na roda:%d\n",init);
+  while (tentativas >= 1){
+    sua_sorte = rand() % 2;
+  if (sua_sorte == 0) {
+    fortuna_infortunio = rand() % 8 - 8;
+  }
+  else {
+    fortuna_infortunio = rand() % 8;
+  }
+  result = fortuna_infortunio;
+  printf("fortuna_infortunio a ser somado:%d\n",result);
+  printf("Resultado do seu giro:%d\n",mostraNumeroEmBinario(soma(init,result)));
+  init = mostraNumeroEmBinario(soma(init,result));
+  tentativas --;
+  if (tentativas >= 1){
+  printf("Desejas continuar a jogar? Se sim, aperte 1. Para parar, aperte 2.\n");
+  scanf("%d",&yeNo);
+  if (yeNo == 2){
+    break;
+  }
+  }
+  }
+  printf("Jogo encerrado.");
+}
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+//temo que transformar o que ta em cima em uma função, e o que ta em baixo para chamar eles
+int main(){
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+}
